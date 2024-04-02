@@ -93,4 +93,20 @@ server {
 }
 ```
 
+### Seperate Server blocks into different files
+
+While it is easier to put the server block into the main config imagine managing multiple webservers keeping it all in one main conf file would be a mess to handle. With NGINX we can split the server conf making managing easier.
+\\
+We will be using the `sites-enabled` and `sites-available` approach
+assuming we are in our `/etc/nginx` Directory.\
+Make the following directory:\
+```
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+```
+
+
+## SET-UP
+Finally we are on the set-up assuming you did all the previous steps and installed vim and nginx we proceed setting up the server.\\
+Create the directory `sudo mkdir -p /home/web/html/nginx-2420` this will act as the project root aswell as where documents to the website will be stored
 
