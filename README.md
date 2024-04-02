@@ -1,8 +1,8 @@
 # NGINX-2420
 Assignment 3 for linux 2420 w/ Arch Linux Server
 
-# NGINX 2 Domain Set-up
-We will be setting up NGINX hosting 2 domains on a single server, before we start please read the following to understand what is going on.
+# NGINX Domain Set-up
+We will be setting up NGINX hosting a domain with server blocks, before we start please read the following to understand what is going on.
 
 ## Prerequisite
 Assuming we already have an Arch Linux Server droplet set-up aswell as sudo access in your system. Proceed with the tutorial:
@@ -96,14 +96,34 @@ server {
 ### Seperate Server blocks into different files
 
 While it is easier to put the server block into the main config imagine managing multiple webservers keeping it all in one main conf file would be a mess to handle. With NGINX we can split the server conf making managing easier.
-\\
+\
+\
 We will be using the `sites-enabled` and `sites-available` approach
-assuming we are in our `/etc/nginx` Directory.\
-Make the following directory:\
+assuming we are in our `/etc/nginx` Directory. \
+Make the following directory: \
 ```
 mkdir /etc/nginx/sites-available
 mkdir /etc/nginx/sites-enabled
 ```
+\
+Change directories into `sites-available` this directory is for storing all your site configs
+create a conf file `sudo vim example.conf` \
+
+paste the following:
+```
+server {
+    listen 80;
+    listen [::]:80;
+    server_name localhost;
+    root /home/web/html/nginx-2420;
+    location / {
+        index index.php index.html index.htm;
+    }
+```
+\
+After the configurations is done and saved run the following to create a symbolic link`sudo ln -s /etc/nginx/sites-available/example.conf /etc/nginx/sites-enabled/` \
+Run `sudo nginx -t` to check for syntax errors \
+If test is successful run `sudo systemctl reload nginx` to reload NGINX and apply the configuration changes
 
 
 ## SET-UP
