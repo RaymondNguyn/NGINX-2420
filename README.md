@@ -111,16 +111,16 @@ create a conf file `sudo vim example.conf` \
 
 paste the following:
 ```
-http{
+
 server {
     listen 80;
     listen [::]:80;
     server_name localhost;
-    root /home/web/html/nginx-2420;
+    root /web/html/nginx-2420;
     location / {
         index index.php index.html index.htm;
     }
-}
+
 ```
 /
 In the `/etc/nginx/nginx.conf` // 
@@ -139,5 +139,40 @@ To disable the server run`unlink /etc/nginx/sites-enabled/example.conf`
 
 ## SET-UP
 Finally we are on the set-up assuming you did all the previous steps and installed vim and nginx we proceed setting up the server.\\
-Create the directory `sudo mkdir -p /home/web/html/nginx-2420` this will act as the project root aswell as where documents to the website will be stored
+Create the directory `sudo mkdir -p /web/html/nginx-2420` this will act as the project root aswell as where documents to the website will be stored
+\
+Add the index.html file:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2420</title>
+    <style>
+        * {
+            color: #db4b4b;
+            background: #16161e;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>All your base are belong to us</h1>
+</body>
+</html>
 
+```
+\
+and finally `sudo systemctl restart nginx` \
+you can `sudo systemctl enable nginx` so it boots on system start
