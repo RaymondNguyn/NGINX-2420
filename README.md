@@ -111,6 +111,7 @@ create a conf file `sudo vim example.conf` \
 
 paste the following:
 ```
+http{
 server {
     listen 80;
     listen [::]:80;
@@ -119,12 +120,22 @@ server {
     location / {
         index index.php index.html index.htm;
     }
+}
 ```
+/
+In the `/etc/nginx/nginx.conf` // 
+add to the end of the http block
+```
+include sites-enabled/*;
+```
+
+
 \
 After the configurations is done and saved run the following to create a symbolic link`sudo ln -s /etc/nginx/sites-available/example.conf /etc/nginx/sites-enabled/` \
 Run `sudo nginx -t` to check for syntax errors \
 If test is successful run `sudo systemctl reload nginx` to reload NGINX and apply the configuration changes
-
+\\
+To disable the server run`unlink /etc/nginx/sites-enabled/example.conf`
 
 ## SET-UP
 Finally we are on the set-up assuming you did all the previous steps and installed vim and nginx we proceed setting up the server.\\
