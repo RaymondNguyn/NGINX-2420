@@ -69,6 +69,7 @@ In the `/etc/nginx/nginx.conf` file paste the following in the `http{}`
 `root` is the directory where the files for `server_name` will be\
 `location /` Defines how nginx should handle request for ('/') in the URL in this case nginx is look for the following: `index.php index.html index.htm`
 
+### Server Block Config
 ```
 server {
     listen 80;
