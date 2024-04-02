@@ -64,9 +64,9 @@ Server blocks are to host more than one domain on a single server
 
 In the `/etc/nginx/nginx.conf` file paste the following in the `http{}`
 
-`listen 80` listen for HTTP request on port 80
-`server_name` is where your domain name goes
-`root` is the directory where the files for `server_name` will be
+`listen 80` listen for HTTP request on port 80\
+`server_name` is where your domain name goes\
+`root` is the directory where the files for `server_name` will be\
 `location /` Defines how nginx should handle request for ('/') in the URL in this case nginx is look for the following: `index.php index.html index.htm`
 
 ```
