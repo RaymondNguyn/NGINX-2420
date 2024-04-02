@@ -1,30 +1,33 @@
 # NGINX-2420
 Assignment 3 for linux 2420 w/ Arch Linux Server
 
-# Prerequisite
+# NGINX 2 Domain Set-up
+We will be setting up NGINX hosting 2 domains on a single server, before we start please read the following to understand what is going on.
+
+## Prerequisite
 Assuming we already have an Arch Linux Server droplet set-up aswell as sudo access in your system. Proceed with the tutorial:
 You have to install the following packages:
 - VIM
 - NGINX
 
 
-## CHECK/UPDATE ARCH
+### CHECK/UPDATE ARCH
 Before we install any packages make sure our system is up to date with the following:
 `sudo pacman -Syu`
 It is important to keep our distro up-to-date to make sure everything works with eachother without conflicts
 
-## VIM
+### VIM
 vim is a text editor we will need this to edit files on our linux distro aswell as configure our nginx server
 To install vim in arch linux run `sudo pacman -S vim`
 
-## NGINX
+### NGINX
 Nginx is a webserver software used to host and serve webpages
 To install NGINX in arch linux run `sudo pacman -S nginx`
 
-# NGINX CONFIGURATIONS
+## NGINX CONFIGURATIONS
 The default NGINX directory is located at `/etc/nginx/` while the main configuration file is located at `/etc/nginx/nginx.conf`
 
-## Example of what the NGINX Conf file looks like
+### Example of what the NGINX Conf file looks like
 ```
 user http;
 worker_processes auto;
