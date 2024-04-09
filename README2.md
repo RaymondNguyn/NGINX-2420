@@ -9,4 +9,6 @@ We will then allow the follow ports  through with `ufw allow [port]` \
 - `uf allow 8080` Our backend server
 
 ## SFTP
-Now we will upload the backend file from our local PC with SFTP In the terminal enter ` sftp -i /path/tp/authkey [user]@[ipaddr]`
+Now we will upload the backend file from our local PC with SFTP In the terminal enter ` sftp -i /path/tp/authkey [user]@[ipaddr]` Once in whatever command on linux to navigate the local pc you just add an l `lcd` locally change directory. Change directory to the backend file on your local pc and use `put [backend-server]` to upload it to your remote server. Once that is done `exit`.
+
+##
