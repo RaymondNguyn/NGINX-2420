@@ -32,6 +32,89 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 ```
-After pasting that `sudo systemctl daemon-reload` and then `sudo systemctl start backend.service` This will then get reversed proxied by NGINX
+After pasting that `sudo systemctl daemon-reload` and then `sudo systemctl start backend.service` This will then get reversed proxied by NGINX check to see if the service is running and active with `sudo systemctl status backend.service`
 
 ### NGINX Reverse Proxy
+
+Now that the above is done change directory to our sites avalible file at `/etc/nginx/sites-available` we are then going to edit the `nginx-2420.conf` file created from part 1. `sudo vim nginx-2420.conf` and then \
+
+Paste the following into the server block from last time
+
+```
+    location /hey {
+        # Define the reverse proxy settings
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+    location /echo {
+        # Define the reverse proxy settings
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+```
+
+The file should look like this in the end:
+```
+server {
+    listen 80;
+    listen [::]:80;
+    server_name 146.190.162.154;
+    root /web/html/nginx-2420;
+    location / {
+        index index.php index.html index.htm;
+    }
+
+    location /hey {
+        # Define the reverse proxy settings
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+    location /echo {
+        # Define the reverse proxy settings
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        }
+}
+```
+After pasting the following restart your nginx with `sudo systemctl restart nginx`
+
+### Testing
+In the webbrower of choice enter the droplet ip as you can see the page from the last part. \
+Now to test if what we did worked enter `http://[ipaddress]/hey` you should see a little `Hey there` \
+You could also test in the terminal with:
+
+The following two will return the raw text of each
+```
+curl http://146.190.162.154/ 
+```
+
+```
+curl http://146.190.162.154/hey
+```
+
+The following is a POST request that will echo back in the terminal
+```
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"message": "Hello from your server"}' \
+  http://[Ipaddress]/echo
+```
+
+#END
+That is the end of this tutorial by Raymond Nguyen for Assignment 3 Part 2
