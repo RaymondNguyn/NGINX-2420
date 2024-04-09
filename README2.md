@@ -1,9 +1,9 @@
 # PART 2
 
 ## FIREWALL SETUP-UFW
-Assuming we are using the same file from before. To install a fire wall we will be using UFW install with `sudo pacman -S ufw` \
+Assuming we are using the same file from before. To install a fire wall we will be using UFW install with `sudo pacman -S ufw` 
 Reset your droplet \
-We will then allow the follow ports  through with `ufw allow [port]` \
+We will then allow the follow ports  through with `ufw allow [port]` 
 - `ufw allow 22` Our ssh
 - `ufw allow 'NGINX'` Our Nginx
 - `uf allow 8080` Our backend server
@@ -16,7 +16,7 @@ Now that the backend is uploaded on the remote server we have to move it to the 
 Once that is done we will now create a service file to run the backend.
 
 ### Service file
-Change directories to `cd /etc/systemd/system`. Now create a service file with `sudo vim [service-file-name.service]` \
+Change directories to `cd /etc/systemd/system`. Now create a service file with `sudo vim [service-file-name.service]` 
 
 Paste the following:
 ```
