@@ -21,15 +21,17 @@ Change directories to `cd /etc/systemd/system`. Now create a service file with `
 Paste the following:
 ```
 [Unit]
-Description=Backend for NGINX
+Description=Backend for nginx
 After=network.target
 
 [Service]
-User=[
-WorkingDirectory=/home/ray/nginx-server
-Environment=PORT=8080
-ExecStart=/home/ray/env/nginx/bin/gunicorn --workers 3 --bind 0.0.0.0:8000 wsgi:app
+ExecStart=/usr/local/bin/hello-server
+Restart=on-failure
+
 
 [Install]
 WantedBy=multi-user.target
 ```
+After pasting that `sudo systemctl daemon-reload` and then `sudo systemctl start backend.service` This will then get reversed proxied by NGINX
+
+### NGINX Reverse Proxy
